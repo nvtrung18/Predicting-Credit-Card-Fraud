@@ -1,0 +1,47 @@
+{
+  "task": "2.3 MLP imbalance experiments",
+  "seed": 9,
+  "split": "shared stratified 80/20 split from task 2.1",
+  "pos_weight_formula": "n_negative / n_positive from training fold",
+  "positive_count_train": 9351,
+  "negative_count_train": 550617,
+  "pos_weight": 58.88322104587745,
+  "experiments": [
+    {
+      "task": "2.1 MLP baseline",
+      "seed": 9,
+      "split": "stratified 80/20",
+      "n_train": 559968,
+      "n_validation": 139992,
+      "positive_rate_train": 0.01669916883111,
+      "positive_rate_validation": 0.016700955107808113,
+      "n_features_after_preprocessing": 54,
+      "architecture": "54 -> 128 -> 64 -> 1, ReLU, dropout 0.20/0.10",
+      "loss": "BCEWithLogitsLoss (unweighted baseline)",
+      "best_epoch": 9,
+      "epochs_run": 12,
+      "validation_roc_auc": 0.9446222144255438,
+      "validation_average_precision": 0.48434002468821485,
+      "device": "Tesla T4"
+    },
+    {
+      "name": "MLP weighted",
+      "training_seconds": 40.07289934158325,
+      "validation_roc_auc": 0.9445958360060793,
+      "validation_average_precision": 0.48071565178737496,
+      "best_epoch": 5,
+      "epochs_run": 8,
+      "pos_weight": 58.88322104587745
+    },
+    {
+      "name": "MLP embedding",
+      "training_seconds": 71.42748475074768,
+      "validation_roc_auc": 0.9443391346322338,
+      "validation_average_precision": 0.48258250464607366,
+      "best_epoch": 10,
+      "epochs_run": 12,
+      "pos_weight": null
+    }
+  ],
+  "selected_by_validation_roc_auc": "MLP baseline"
+}

@@ -1,0 +1,23 @@
+{
+  "selected_model": "MLP baseline",
+  "selection_rule": "Highest shared-validation ROC-AUC; Average Precision as tie-break",
+  "validation_metrics": {
+    "roc_auc": 0.9446222144255438,
+    "average_precision": 0.48434002468821485
+  },
+  "best_epoch": 9,
+  "training_seconds": null,
+  "error_analysis": {
+    "model": "MLP baseline",
+    "threshold_for_error_interpretation_only": 0.5,
+    "true_positive": 661,
+    "true_negative": 137433,
+    "false_positive": 221,
+    "false_negative": 1677,
+    "precision_at_threshold": 0.7494331065759637,
+    "recall_at_threshold": 0.2827202737382378
+  },
+  "cross_validation": "Not run; single fixed shared holdout used for comparable model selection.",
+  "test_data_used_for_model_selection": false,
+  "public_leaderboard_used_for_model_selection": false
+}

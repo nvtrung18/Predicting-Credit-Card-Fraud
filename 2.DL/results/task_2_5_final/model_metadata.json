@@ -1,0 +1,56 @@
+{
+  "task": "2.5 final DL submission",
+  "selected_model": "MLP baseline",
+  "selection_rule": "Highest shared-validation ROC-AUC; Average Precision as tie-break",
+  "validation_metrics": {
+    "roc_auc": 0.9446222144255438,
+    "average_precision": 0.48434002468821485
+  },
+  "seed": 9,
+  "epochs": 9,
+  "full_train_rows": 699960,
+  "positive_count_full_train": 11689,
+  "positive_rate_full_train": 0.016699525687182123,
+  "full_train_pos_weight": 58.88194028573873,
+  "numeric_columns": [
+    "amount_usd",
+    "hours_since_last_txn",
+    "txn_count_last_24h",
+    "distance_from_home_km",
+    "card_age_months",
+    "customer_age",
+    "account_balance_usd",
+    "cvv_retry_count",
+    "velocity_score",
+    "time_of_day_hour",
+    "day_of_week",
+    "merchant_risk_score",
+    "prior_disputes",
+    "is_foreign_transaction",
+    "is_new_merchant",
+    "used_vpn",
+    "ip_country_mismatch",
+    "billing_shipping_mismatch",
+    "is_ai_generated_scam_attempt"
+  ],
+  "categorical_columns": [
+    "merchant_category",
+    "card_type",
+    "auth_method",
+    "channel",
+    "device_type"
+  ],
+  "training_seconds": 53.24362564086914,
+  "device": "Tesla T4",
+  "test_rows": 299984,
+  "submission_path": "/kaggle/working/task_2_5_final/submission.csv",
+  "submission_rows": 299984,
+  "submission_columns": [
+    "id",
+    "is_fraud"
+  ],
+  "probability_min": 4.8269125585420625e-08,
+  "probability_max": 0.9897074699401855,
+  "test_labels_used": false,
+  "competition_submission_uploaded": false
+}

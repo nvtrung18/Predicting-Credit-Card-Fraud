@@ -1,0 +1,17 @@
+{
+  "task": "2.1 MLP baseline",
+  "seed": 9,
+  "split": "stratified 80/20",
+  "n_train": 559968,
+  "n_validation": 139992,
+  "positive_rate_train": 0.01669916883111,
+  "positive_rate_validation": 0.016700955107808113,
+  "n_features_after_preprocessing": 54,
+  "architecture": "54 -> 128 -> 64 -> 1, ReLU, dropout 0.20/0.10",
+  "loss": "BCEWithLogitsLoss (unweighted baseline)",
+  "best_epoch": 9,
+  "epochs_run": 12,
+  "validation_roc_auc": 0.9446222144255438,
+  "validation_average_precision": 0.48434002468821485,
+  "device": "Tesla T4"
+}

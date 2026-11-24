@@ -1,0 +1,9 @@
+{
+  "name": "MLP embedding",
+  "training_seconds": 71.42748475074768,
+  "validation_roc_auc": 0.9443391346322338,
+  "validation_average_precision": 0.48258250464607366,
+  "best_epoch": 10,
+  "epochs_run": 12,
+  "pos_weight": null
+}

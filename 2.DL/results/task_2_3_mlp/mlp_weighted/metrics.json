@@ -1,0 +1,9 @@
+{
+  "name": "MLP weighted",
+  "training_seconds": 40.07289934158325,
+  "validation_roc_auc": 0.9445958360060793,
+  "validation_average_precision": 0.48071565178737496,
+  "best_epoch": 5,
+  "epochs_run": 8,
+  "pos_weight": 58.88322104587745
+}
