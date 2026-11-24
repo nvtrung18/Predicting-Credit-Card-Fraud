@@ -1,5 +1,7 @@
 # Hướng dẫn chạy pipeline tối ưu Deep Learning trên Kaggle
 
+> **Tài liệu lịch sử:** Source notebook 2.6–2.11 đã được gỡ khỏi nhánh DL; quy trình hiện tại giữ các bước 2.1–2.5. Hướng dẫn bên dưới mô tả pipeline cũ. Các liên kết source trỏ về commit lưu trước khi gỡ, không phải source đang có trong nhánh.
+
 ## 1. Phạm vi và trạng thái
 
 Đây là phần triển khai tiếp theo của nhánh 2, gồm MLP, embedding MLP, TabNet và ensemble DL. Các notebook lịch sử 2.1–2.5 được giữ nguyên. Source mới là notebook; không yêu cầu chạy train trên laptop.
@@ -14,12 +16,12 @@ Mọi notebook cần gắn competition data. Mặc định DATA_DIR=None: code t
 
 | Task/source | Output notebook cần Add Input | GPU | Đầu ra chính |
 |---|---|---|---|
-| [2.6 — Foundation](../src/credit-card-fraud-2-6-experiment-foundation.ipynb) | Output task 2.1, có file split theo ID | Có | Audit, holdout seed 9, CV folds, module chung, baseline chạy lại |
-| [2.7 — MLP tuning](../src/credit-card-fraud-2-7-mlp-tuning.ipynb) | Output 2.6 | Có | Bảng thí nghiệm và toàn bộ config/checkpoint/history |
-| [2.8 — Feature/embedding/TabNet](../src/credit-card-fraud-2-8-dl-feature-experiments.ipynb) | Outputs 2.6 + 2.7 | Có | Bảng screening gồm cả ứng viên cũ và biến thể mới |
-| [2.9 — Cross-validation](../src/credit-card-fraud-2-9-dl-cross-validation.ipynb) | Outputs 2.6 + 2.8 | Có | Baseline + tối đa 2 ứng viên, 5 checkpoints mỗi config, OOF và điểm từng fold |
-| [2.10 — OOF ensemble](../src/credit-card-fraud-2-10-dl-oof-ensemble.ipynb) | Outputs 2.6 + 2.9 | Không bắt buộc | Quyết định chọn mô hình đơn/ensemble và trọng số cố định |
-| [2.11 — Submission](../src/credit-card-fraud-2-11-optimized-dl-submission.ipynb) | Outputs 2.6 + 2.9 + 2.10 | Khuyến nghị | CSV dự đoán, metadata và báo cáo; không train lại |
+| [2.6 — Foundation](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-6-experiment-foundation.ipynb) | Output task 2.1, có file split theo ID | Có | Audit, holdout seed 9, CV folds, module chung, baseline chạy lại |
+| [2.7 — MLP tuning](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-7-mlp-tuning.ipynb) | Output 2.6 | Có | Bảng thí nghiệm và toàn bộ config/checkpoint/history |
+| [2.8 — Feature/embedding/TabNet](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-8-dl-feature-experiments.ipynb) | Outputs 2.6 + 2.7 | Có | Bảng screening gồm cả ứng viên cũ và biến thể mới |
+| [2.9 — Cross-validation](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-9-dl-cross-validation.ipynb) | Outputs 2.6 + 2.8 | Có | Baseline + tối đa 2 ứng viên, 5 checkpoints mỗi config, OOF và điểm từng fold |
+| [2.10 — OOF ensemble](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-10-dl-oof-ensemble.ipynb) | Outputs 2.6 + 2.9 | Không bắt buộc | Quyết định chọn mô hình đơn/ensemble và trọng số cố định |
+| [2.11 — Submission](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-11-optimized-dl-submission.ipynb) | Outputs 2.6 + 2.9 + 2.10 | Khuyến nghị | CSV dự đoán, metadata và báo cáo; không train lại |
 
 1. Import source notebook vào Kaggle, Add Input theo bảng, bật GPU cho bước train.
 2. Dùng Save Version / Run All; chờ trạng thái thành công và output có đủ artifact.
@@ -31,7 +33,7 @@ Nếu gắn nhiều version 2.6, điền FOUNDATION_DIR chính xác. Với các 
 
 ## 3. Code dùng chung nằm ở đâu?
 
-[Notebook 2.6](../src/credit-card-fraud-2-6-experiment-foundation.ipynb) có các cell `%%writefile` chứa đầy đủ source có thể đọc/sửa. Khi chạy trên Kaggle, chúng xuất module `credit_fraud_dl_engine.py` vào output của 2.6. Các notebook sau import module này từ input đã gắn; laptop không cần một source Python riêng.
+[Notebook 2.6](https://github.com/nvtrung18/Predicting-Credit-Card-Fraud/blob/abba0da4c0c0eff06db78c15156ec2d3a76c350e/2.DL/src/credit-card-fraud-2-6-experiment-foundation.ipynb) có các cell `%%writefile` chứa đầy đủ source có thể đọc/sửa. Khi chạy trên Kaggle, chúng xuất module `credit_fraud_dl_engine.py` vào output của 2.6. Các notebook sau import module này từ input đã gắn; laptop không cần một source Python riêng.
 
 Module có các phần:
 
