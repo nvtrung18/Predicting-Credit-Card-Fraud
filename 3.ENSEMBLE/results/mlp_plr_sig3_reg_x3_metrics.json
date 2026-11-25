@@ -1,0 +1,124 @@
+{
+  "model": "mlp_plr_sig3_reg_x3",
+  "oof_roc_auc": 0.9470715805234318,
+  "oof_average_precision": 0.5140929614361984,
+  "fold_roc_auc": [
+    0.9468170342135968,
+    0.9453201309470792,
+    0.946372656139394,
+    0.950253167265323,
+    0.9481819028214491
+  ],
+  "fold_roc_auc_mean": 0.9473889782773683,
+  "fold_roc_auc_std": 0.0017013211259248688,
+  "source": "3.3",
+  "experiment": "mlp_plr_sig3_reg",
+  "seeds": [
+    9,
+    10,
+    11
+  ],
+  "config": {
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 1024,
+    "max_epochs": 10,
+    "patience": 10,
+    "grad_clip": 1.0,
+    "scheduler": "onecycle",
+    "pos_weight": null,
+    "eval_batch": 16384
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 9,
+      "best_epoch": 4,
+      "auc": 0.9459038161781513
+    },
+    {
+      "fold": 0,
+      "seed": 10,
+      "best_epoch": 7,
+      "auc": 0.9453863616020697
+    },
+    {
+      "fold": 0,
+      "seed": 11,
+      "best_epoch": 7,
+      "auc": 0.9454360803250274
+    },
+    {
+      "fold": 1,
+      "seed": 9,
+      "best_epoch": 6,
+      "auc": 0.9447243335073395
+    },
+    {
+      "fold": 1,
+      "seed": 10,
+      "best_epoch": 7,
+      "auc": 0.944265669980534
+    },
+    {
+      "fold": 1,
+      "seed": 11,
+      "best_epoch": 8,
+      "auc": 0.9436013560760311
+    },
+    {
+      "fold": 2,
+      "seed": 9,
+      "best_epoch": 7,
+      "auc": 0.9446342376653242
+    },
+    {
+      "fold": 2,
+      "seed": 10,
+      "best_epoch": 6,
+      "auc": 0.9454617205586419
+    },
+    {
+      "fold": 2,
+      "seed": 11,
+      "best_epoch": 6,
+      "auc": 0.9456907695685055
+    },
+    {
+      "fold": 3,
+      "seed": 9,
+      "best_epoch": 5,
+      "auc": 0.949147840179944
+    },
+    {
+      "fold": 3,
+      "seed": 10,
+      "best_epoch": 6,
+      "auc": 0.9490276978904088
+    },
+    {
+      "fold": 3,
+      "seed": 11,
+      "best_epoch": 7,
+      "auc": 0.9495003918964054
+    },
+    {
+      "fold": 4,
+      "seed": 9,
+      "best_epoch": 6,
+      "auc": 0.9471509181666141
+    },
+    {
+      "fold": 4,
+      "seed": 10,
+      "best_epoch": 5,
+      "auc": 0.946946583680388
+    },
+    {
+      "fold": 4,
+      "seed": 11,
+      "best_epoch": 5,
+      "auc": 0.9470891334111115
+    }
+  ]
+}

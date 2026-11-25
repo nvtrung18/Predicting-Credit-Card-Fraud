@@ -1,0 +1,53 @@
+{
+  "model": "mlp_base",
+  "oof_roc_auc": 0.9425621793566317,
+  "oof_average_precision": 0.48902037569351475,
+  "fold_roc_auc": [
+    0.9430858281558733,
+    0.9401155953019064,
+    0.9412520252766003,
+    0.9444355768929731,
+    0.944356354633491
+  ],
+  "fold_roc_auc_mean": 0.9426490760521687,
+  "fold_roc_auc_std": 0.0017127412758495058,
+  "source": "3.2 MLP baseline (DL 2.1 config)",
+  "config": {
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 4096,
+    "max_epochs": 12,
+    "patience": 3,
+    "grad_clip": 1.0,
+    "scheduler": "none",
+    "pos_weight": null,
+    "eval_batch": 16384
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "best_epoch": 12,
+      "auc": 0.9430858281558733
+    },
+    {
+      "fold": 1,
+      "best_epoch": 5,
+      "auc": 0.9401155953019064
+    },
+    {
+      "fold": 2,
+      "best_epoch": 9,
+      "auc": 0.9412520252766003
+    },
+    {
+      "fold": 3,
+      "best_epoch": 11,
+      "auc": 0.9444355768929731
+    },
+    {
+      "fold": 4,
+      "best_epoch": 8,
+      "auc": 0.944356354633491
+    }
+  ]
+}

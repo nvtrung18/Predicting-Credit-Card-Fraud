@@ -329,3 +329,19 @@ Các notebook sử dụng đường dẫn dữ liệu `/kaggle/input/competition
 - Thời gian và metric phụ thuộc dữ liệu, phần cứng, seed và môi trường thư viện. Những số liệu đã lưu không phải cam kết kết quả của mọi lần chạy lại.
 
 Các nguồn kết quả chính để kiểm tra lại: [metrics MLP](2.DL/results/task_2_1_mlp/metrics.json), [metrics TabNet](2.DL/results/task_2_2_tabnet/metrics.json), [thí nghiệm MLP](2.DL/results/task_2_3_mlp/experiment_table.csv), [bảng so sánh validation](2.DL/results/task_2_4_validation_analysis/comparison.csv), [quyết định chọn mô hình](2.DL/results/task_2_4_validation_analysis/selected_model.json) và [metadata lần refit](2.DL/results/task_2_5_final/model_metadata.json).
+
+## 10. Kết hợp ML + DL (3.0–3.4)
+
+Nhánh `ML_DL_ensemble` gộp code ML của nhánh `ML_Hieu` (trong [1.ML/src/](1.ML/src/)) với nhánh DL. Mọi model được đánh giá trên cùng 5 fold ([folds_5_seed9.csv](shared/folds/folds_5_seed9.csv)), và phương án kết hợp được chọn bằng CV lồng. Chi tiết: [báo cáo kết hợp ML + DL](reports/task_3_ensemble.md).
+
+| Notebook (Kaggle) | Nội dung | Kết quả chính |
+|---|---|---|
+| [3.0](3.ENSEMBLE/src/3-0-shared-folds.ipynb) | Tạo folds chung | Trùng từng dòng với splitter ML 1.3–1.5 |
+| [3.1](3.ENSEMBLE/src/3-1-ml-models-shared-folds.ipynb) | 5 model ML task 1.5 | Blend OOF 0.94789 (task 1.5: 0.94792) |
+| [3.2](3.ENSEMBLE/src/3-2-mlp-baseline-5fold.ipynb) | MLP 2.1 chạy 5-fold | OOF 0.94256 |
+| [3.3](3.ENSEMBLE/src/3-3-dl-upgrades.ipynb) | MLP + PLR numeric embedding | `mlp_plr_sig3_reg_x3` OOF 0.94707 |
+| [3.4](3.ENSEMBLE/src/3-4-blend-and-submission.ipynb) | Blend / stacking + submission | `ml+dl_all`: 0.94852 so với ML-only 0.94784 (thắng 5/5 fold) |
+
+**Public LB:** ensemble ML + DL **0.94972**, ML-only trên cùng pipeline 0.94930, ML task 1.5 0.94918, DL task 2.5 0.94263.
+
+Code dùng chung: [shared/features.py](shared/features.py), [shared/dl.py](shared/dl.py). Metrics: [3.ENSEMBLE/results/](3.ENSEMBLE/results/). Submission: [submissions/submission_ensemble.csv](submissions/submission_ensemble.csv).

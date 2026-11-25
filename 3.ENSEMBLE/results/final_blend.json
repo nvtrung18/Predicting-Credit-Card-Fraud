@@ -1,0 +1,35 @@
+{
+  "selected_method": "ml+dl_all",
+  "selection": "max nested-CV fold-mean ROC-AUC on shared 5 folds (seed 9)",
+  "nested_cv": {
+    "fold_auc_mean": 0.9485239235232301,
+    "fold_auc_std": 0.0017871995723233271,
+    "fold_ap_mean": 0.5202503602438183,
+    "gain_vs_ml_only": 0.0006830588494812773
+  },
+  "fit_on_all_oof": {
+    "weights": {
+      "lgb_nl3": 0.19096003030507142,
+      "lgb_nl4": 0.18057667809667438,
+      "lgb_nl8": 0.07600280364724156,
+      "spline_lr": 0.03333333333333333,
+      "xgb": 0.1004826718974807,
+      "mlp_plr_sig3_reg_x3": 0.18568794945016084,
+      "mlp_plr_sig1_reg": 0.03333333333333333,
+      "mlp_plr_sig3": 0.09778533604862619,
+      "mlp_plr_sig10_reg": 0.10183786388807817
+    }
+  },
+  "models": [
+    "lgb_nl3",
+    "lgb_nl4",
+    "lgb_nl8",
+    "spline_lr",
+    "xgb",
+    "mlp_plr_sig3_reg_x3",
+    "mlp_plr_sig1_reg",
+    "mlp_plr_sig3",
+    "mlp_plr_sig10_reg"
+  ],
+  "leaderboard_used_for_selection": false
+}
