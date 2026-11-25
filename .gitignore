@@ -1,0 +1,19 @@
+# Data and heavy artifacts
+data/
+oof_*.csv
+submission_*.csv
+
+# Local notes, slides, and reference branches
+Tổng quan.txt
+Đề bài.txt
+*.pdf
+2.DL/
+
+# Scratch / draft scripts and logs
+kiro_solution.py
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
