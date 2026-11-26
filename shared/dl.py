@@ -160,16 +160,37 @@ class PeriodicEmbedding(nn.Module):
         return torch.relu(v).flatten(1)
 
 
+class ResNetHead(nn.Module):
+    """Tabular ResNet (Gorishniy et al. 2021): Linear -> n x [BN -> Linear -> ReLU -> Dropout -> Linear -> Dropout
+    + skip] -> BN -> ReLU -> Linear."""
+
+    def __init__(self, in_dim: int, d: int = 256, n_blocks: int = 2, mult: int = 2, dropout: float = 0.2):
+        super().__init__()
+        self.inp = nn.Linear(in_dim, d)
+        self.blocks = nn.ModuleList(nn.Sequential(
+            nn.BatchNorm1d(d), nn.Linear(d, d * mult), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(d * mult, d), nn.Dropout(dropout)) for _ in range(n_blocks))
+        self.out = nn.Sequential(nn.BatchNorm1d(d), nn.ReLU(), nn.Linear(d, 1))
+
+    def forward(self, x):
+        x = self.inp(x)
+        for block in self.blocks:
+            x = x + block(x)
+        return self.out(x)
+
+
 class EmbeddingMLP(nn.Module):
-    """PLR embeddings for numeric columns + nn.Embedding per categorical column + raw binary columns -> MLP."""
+    """PLR embeddings for numeric columns + nn.Embedding per categorical column + raw binary columns -> MLP or
+    ResNet head."""
 
     def __init__(self, n_numeric: int, n_binary: int, cat_cardinalities, hidden=(256, 128), dropout=(0.15, 0.10),
-                 n_frequencies: int = 16, sigma: float = 0.1, d_num: int = 16):
+                 n_frequencies: int = 16, sigma: float = 0.1, d_num: int = 16, head: str = "mlp"):
         super().__init__()
         self.num = PeriodicEmbedding(n_numeric, n_frequencies, sigma, d_num)
         dims = [min(16, max(2, int(np.ceil(np.sqrt(k + 1))))) for k in cat_cardinalities]
         self.cats = nn.ModuleList(nn.Embedding(k + 1, d) for k, d in zip(cat_cardinalities, dims))  # index 0 = unknown
-        self.head = MLP(self.num.out_dim + n_binary + sum(dims), hidden, dropout)
+        in_dim = self.num.out_dim + n_binary + sum(dims)
+        self.head = ResNetHead(in_dim, dropout=dropout[0]) if head == "resnet" else MLP(in_dim, hidden, dropout)
 
     def forward(self, x_num, x_bin, x_cat):
         parts = [self.num(x_num), x_bin] + [emb(x_cat[:, i]) for i, emb in enumerate(self.cats)]

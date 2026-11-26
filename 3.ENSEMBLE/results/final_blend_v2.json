@@ -1,0 +1,47 @@
+{
+  "selected_method": "rw_all_foldrank",
+  "selection": "max nested-CV fold-mean ROC-AUC, must beat v1 on >= 4/5 folds",
+  "nested_cv": {
+    "fold_auc_mean": 0.9487669718761873,
+    "fold_auc_std": 0.0017953155278902923,
+    "fold_ap_mean": 0.5216997515180739,
+    "gain_vs_v1": 0.00024304835295718696
+  },
+  "fit_on_all_oof": {
+    "weights": {
+      "lgb_nl8": 0.02,
+      "spline_lr": 0.02,
+      "xgb": 0.06228021680968168,
+      "mlp_plr_sig1_reg": 0.02,
+      "lgb_nl3_cnt": 0.26040909336833856,
+      "lgb_nl3_x3": 0.05984470073381737,
+      "lgb_nl4_x3": 0.04573134821485225,
+      "catboost_d4": 0.056835546265426695,
+      "catboost_d6": 0.02,
+      "mlp_plr_sig3_reg_x5": 0.14707186787936816,
+      "mlp_plr_sig3_x3": 0.023078112656947796,
+      "mlp_plr_sig10_reg_x3": 0.06464859645544949,
+      "mlp_plr_sig2_reg": 0.02,
+      "mlp_plr_sig5_reg": 0.15096582718843266,
+      "resnet_plr_sig3": 0.029134690427685385
+    }
+  },
+  "candidates": [
+    "lgb_nl8",
+    "spline_lr",
+    "xgb",
+    "mlp_plr_sig1_reg",
+    "lgb_nl3_cnt",
+    "lgb_nl3_x3",
+    "lgb_nl4_x3",
+    "catboost_d4",
+    "catboost_d6",
+    "mlp_plr_sig3_reg_x5",
+    "mlp_plr_sig3_x3",
+    "mlp_plr_sig10_reg_x3",
+    "mlp_plr_sig2_reg",
+    "mlp_plr_sig5_reg",
+    "resnet_plr_sig3"
+  ],
+  "leaderboard_used_for_selection": false
+}

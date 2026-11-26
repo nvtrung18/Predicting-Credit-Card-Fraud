@@ -1,0 +1,62 @@
+{
+  "model": "mlp_plr_sig2_reg",
+  "oof_roc_auc": 0.9459486384193765,
+  "oof_average_precision": 0.5084502419980246,
+  "fold_roc_auc": [
+    0.9463537341738872,
+    0.9446140487519055,
+    0.945842718524022,
+    0.9496924965152646,
+    0.9472039142585377
+  ],
+  "fold_roc_auc_mean": 0.9467413824447235,
+  "fold_roc_auc_std": 0.0016974349237003055,
+  "source": "3.3",
+  "experiment": "mlp_plr_sig2_reg",
+  "seeds": [
+    9
+  ],
+  "config": {
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 1024,
+    "max_epochs": 10,
+    "patience": 10,
+    "grad_clip": 1.0,
+    "scheduler": "onecycle",
+    "pos_weight": null,
+    "eval_batch": 16384
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 9,
+      "best_epoch": 6,
+      "auc": 0.9463537341738872
+    },
+    {
+      "fold": 1,
+      "seed": 9,
+      "best_epoch": 7,
+      "auc": 0.9446140487519055
+    },
+    {
+      "fold": 2,
+      "seed": 9,
+      "best_epoch": 7,
+      "auc": 0.945842718524022
+    },
+    {
+      "fold": 3,
+      "seed": 9,
+      "best_epoch": 5,
+      "auc": 0.9496924965152646
+    },
+    {
+      "fold": 4,
+      "seed": 9,
+      "best_epoch": 7,
+      "auc": 0.9472039142585377
+    }
+  ]
+}

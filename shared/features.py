@@ -95,6 +95,18 @@ def add_extra_features(d: pd.DataFrame) -> pd.DataFrame:
     return X
 
 
+def add_count_features(tr: pd.DataFrame, te: pd.DataFrame, cols=None):
+    """cnt_<col> = how often each value of <col> occurs in train+test (unsupervised, no labels used).
+
+    Synthetic Playground data often reuses generator values; their frequency can carry signal.
+    Returns (train_counts, test_counts) as float32 frames.
+    """
+    cols = cols or NUMS
+    both = pd.concat([tr[cols], te[cols]], ignore_index=True)
+    out = pd.DataFrame({f"cnt_{c}": both[c].map(both[c].value_counts()).astype(np.float32) for c in cols})
+    return out.iloc[:len(tr)].reset_index(drop=True), out.iloc[len(tr):].reset_index(drop=True)
+
+
 def tree_frame(d: pd.DataFrame) -> pd.DataFrame:
     """Feature frame for LightGBM (categories kept as pandas category)."""
     return pd.concat([d[NUMS + BOOLS + CATS].copy(), add_extra_features(d)], axis=1)
@@ -169,6 +181,47 @@ def tune_weights(R, y, iters: int = 300, seed: int = 0):
         if s > best + 1e-7:
             best, best_w = s, w
     return best_w, best
+
+
+def rank_within_folds(oof, fold) -> np.ndarray:
+    """Rank OOF predictions inside each fold (removes scale differences between fold models)."""
+    r = np.empty(len(oof), dtype=float)
+    for f in range(fold.max() + 1):
+        m = fold == f
+        r[m] = rank01(oof[m])
+    return r
+
+
+def hill_climb(R, y, max_steps: int = 40, init_best: bool = True):
+    """Caruana ensemble selection on rank columns: greedily add (with replacement) the column that most
+    improves ROC-AUC of the mean; returns weights summing to 1."""
+    k = R.shape[1]
+    counts = np.zeros(k)
+    if init_best:
+        counts[int(np.argmax([roc_auc_score(y, R[:, j]) for j in range(k)]))] = 1
+    current = R @ counts
+    best = roc_auc_score(y, current / counts.sum())
+    for _ in range(max_steps):
+        scores = [roc_auc_score(y, (current + R[:, j]) / (counts.sum() + 1)) for j in range(k)]
+        j = int(np.argmax(scores))
+        if scores[j] <= best + 1e-7:
+            break
+        best, counts[j], current = scores[j], counts[j] + 1, current + R[:, j]
+    return counts / counts.sum(), best
+
+
+def cv_alpha_gain(base, new, y, fold, alphas=np.round(np.arange(0, 0.51, 0.025), 3)):
+    """Blend (1-a)*base + a*new (both ranks); choose a on 4 folds, score on the 5th.
+    Returns (fold-mean AUC of base, fold-mean AUC of blend, chosen alphas)."""
+    nf = fold.max() + 1
+    grid = np.array([[roc_auc_score(y[fold == f], (1 - a) * base[fold == f] + a * new[fold == f])
+                      for f in range(nf)] for a in alphas])
+    scores, chosen = [], []
+    for f in range(nf):
+        best = int(np.argmax(grid[:, [g for g in range(nf) if g != f]].mean(1)))
+        chosen.append(float(alphas[best]))
+        scores.append(grid[best, f])
+    return float(grid[0].mean()), float(np.mean(scores)), chosen
 
 
 def fold_metrics(y, oof, fold) -> dict:
