@@ -332,7 +332,7 @@ Các nguồn kết quả chính để kiểm tra lại: [metrics MLP](2.DL/resul
 
 ## 10. Kết hợp ML + DL (3.0–3.6)
 
-Nhánh `ML_DL_ensemble` gộp code ML của nhánh `ML_Hieu` (trong [1.ML/src/](1.ML/src/)) với nhánh DL. Mọi model được đánh giá trên cùng 5 fold ([folds_5_seed9.csv](shared/folds/folds_5_seed9.csv)), và phương án kết hợp được chọn bằng CV lồng. Chi tiết: [báo cáo kết hợp ML + DL](reports/task_3_ensemble.md).
+Nhánh `ML_DL_ensemble` gộp code ML của nhánh `ML_Hieu` (trong [1.ML/src/](1.ML/src/)) với nhánh DL. Mọi model được đánh giá trên cùng 5 fold ([folds_5_seed9.csv](shared/folds/folds_5_seed9.csv)), và phương án kết hợp được chọn bằng CV lồng. Tài liệu đầy đủ (cách tiếp cận, từng notebook, code dùng chung, kết quả, cách chạy lại trên Kaggle, giới hạn): [3.ENSEMBLE/README.md](3.ENSEMBLE/README.md). Báo cáo tường thuật: [reports/task_3_ensemble.md](reports/task_3_ensemble.md).
 
 | Notebook (Kaggle) | Nội dung | Kết quả chính |
 |---|---|---|
